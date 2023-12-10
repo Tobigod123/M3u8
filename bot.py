@@ -1,9 +1,7 @@
-import telegram
-from telegram.ext import Updater, CommandHandler, MessageHandler, filters
-import subprocess
 import os
-from telegram import Bot
 import logging
+from telegram import Bot, Update, UpdateQueue
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 TOKEN = '6528532477:AAHCLp8krmcep32fwhpo_UDiaQepzOYtB78'
 ffmpeg_process = None
@@ -59,7 +57,10 @@ def stop(update, context):
         context.bot.send_message(chat_id=update.effective_chat.id, text="No recording process is active.")
 
 def main():
-    updater = Updater(bot=Bot(token=TOKEN))
+    bot = Bot(token=TOKEN)
+    update_queue = UpdateQueue()
+    updater = Updater(bot=bot, update_queue=update_queue)
+
     dispatcher = updater.dispatcher
 
     start_handler = CommandHandler('start', start)
@@ -77,4 +78,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-  
