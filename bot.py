@@ -1,22 +1,22 @@
+import telegram
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+import subprocess
 import os
 import logging
-import subprocess
-from telegram import Bot, Update
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 
 TOKEN = '6528532477:AAGLYjNpYVi9rERAG9zIum6v_wsn31cNYxw'
 ffmpeg_process = None
 
-RECORDING_DIRECTORY = 'Recordings'
+RECORDING_DIRECTORY = r'C:\Users\root\Pictures\M3U8\Recordings'
 
 # Set up logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-def start(update: Update, context: CallbackContext):
+def start(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text="Hello! You can use the /record command to start recording a live stream.")
 
-def record(update: Update, context: CallbackContext):
+def record(update, context):
     try:
         url = context.args[0]
         context.bot.send_message(chat_id=update.effective_chat.id, text="Please enter the name for the recorded video file:")
@@ -25,7 +25,7 @@ def record(update: Update, context: CallbackContext):
     except IndexError:
         context.bot.send_message(chat_id=update.effective_chat.id, text="Please provide a valid URL.")
 
-def handle_video_name(update: Update, context: CallbackContext):
+def handle_video_name(update, context):
     if 'waiting_for_name' in context.user_data and context.user_data['waiting_for_name']:
         try:
             video_file_name = update.message.text.strip()
@@ -34,7 +34,7 @@ def handle_video_name(update: Update, context: CallbackContext):
             video_file_path = os.path.join(RECORDING_DIRECTORY, video_file_name)
             command = ['ffmpeg', '-i', url, '-c', 'copy', video_file_path]
             global ffmpeg_process
-            ffmpeg_process = subprocess.Popen(command, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True)
+            ffmpeg_process = subprocess.Popen(command, creationflags=subprocess.CREATE_NEW_CONSOLE)
             context.bot.send_message(chat_id=update.effective_chat.id, text="Recording the live stream.")
             context.user_data['waiting_for_name'] = False
             context.user_data['url'] = None
@@ -44,7 +44,7 @@ def handle_video_name(update: Update, context: CallbackContext):
     else:
         context.bot.send_message(chat_id=update.effective_chat.id, text="Not expecting a file name.")
 
-def stop(update: Update, context: CallbackContext):
+def stop(update, context):
     global ffmpeg_process
     if ffmpeg_process:
         try:
