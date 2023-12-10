@@ -1,7 +1,7 @@
 import os
 import logging
 from telegram import Bot
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+from telegram.ext import Updater, CommandHandler, MessageHandler, filters
 
 TOKEN = '6528532477:AAHCLp8krmcep32fwhpo_UDiaQepzOYtB78'
 ffmpeg_process = None
