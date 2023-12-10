@@ -3,7 +3,7 @@ import telegram
 import logging
 import subprocess
 from telegram import Bot, Update
-from telegram.ext import Updater, CommandHandler, MessageHandler, filters, CallbackContext
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 
 TOKEN = '6528532477:AAHCLp8krmcep32fwhpo_UDiaQepzOYtB78'
 ffmpeg_process = None
@@ -68,7 +68,7 @@ def main():
     start_handler = CommandHandler('start', start)
     record_handler = CommandHandler('record', record)
     stop_handler = CommandHandler('stop', stop)
-    video_name_handler = MessageHandler(filters.text & ~filters.command, handle_video_name)
+    video_name_handler = MessageHandler(Filters.text & ~Filters.command, handle_video_name)
 
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(record_handler)
