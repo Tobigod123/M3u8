@@ -34,7 +34,7 @@ def handle_video_name(update, context):
             video_file_path = os.path.join(RECORDING_DIRECTORY, video_file_name)
             command = ['ffmpeg', '-i', url, '-c', 'copy', video_file_path]
             global ffmpeg_process
-            ffmpeg_process = subprocess.Popen(command, creationflags=subprocess.CREATE_NEW_CONSOLE)
+            ffmpeg_process = subprocess.Popen(command)
             context.bot.send_message(chat_id=update.effective_chat.id, text="Recording the live stream.")
             context.user_data['waiting_for_name'] = False
             context.user_data['url'] = None
