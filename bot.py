@@ -59,7 +59,7 @@ def stop(update, context):
         context.bot.send_message(chat_id=update.effective_chat.id, text="No recording process is active.")
 
 def main():
-    updater = Updater(bot=Bot(token=TOKEN), use_context=True)
+    updater = Updater(bot=Bot(token=TOKEN))
     dispatcher = updater.dispatcher
 
     start_handler = CommandHandler('start', start)
