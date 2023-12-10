@@ -68,7 +68,7 @@ def main():
     start_handler = CommandHandler('start', start)
     record_handler = CommandHandler('record', record)
     stop_handler = CommandHandler('stop', stop)
-    video_name_handler = MessageHandler(Filters.text & ~Filters.command, handle_video_name)
+    video_name_handler = MessageHandler(filters.text & ~filters.command, handle_video_name)
 
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(record_handler)
