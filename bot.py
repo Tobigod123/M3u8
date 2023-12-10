@@ -1,6 +1,6 @@
 import os
 import logging
-from telegram import Bot, Update, UpdateQueue
+from telegram import Bot
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 TOKEN = '6528532477:AAHCLp8krmcep32fwhpo_UDiaQepzOYtB78'
@@ -58,8 +58,7 @@ def stop(update, context):
 
 def main():
     bot = Bot(token=TOKEN)
-    update_queue = UpdateQueue()
-    updater = Updater(bot=bot, update_queue=update_queue)
+    updater = Updater(bot=bot, use_context=True)
 
     dispatcher = updater.dispatcher
 
