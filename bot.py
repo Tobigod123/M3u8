@@ -7,6 +7,8 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, filters, Callb
 TOKEN = '6528532477:AAHCLp8krmcep32fwhpo_UDiaQepzOYtB78'
 ffmpeg_process = None
 
+bot = telegram.Bot(token=TOKEN)
+
 RECORDING_DIRECTORY = 'Recordings'
 
 # Set up logging
@@ -58,7 +60,6 @@ def stop(update: Update, context: CallbackContext):
         context.bot.send_message(chat_id=update.effective_chat.id, text="No recording process is active.")
 
 def main():
-    bot = Bot(token=TOKEN)
     updater = Updater(bot=bot, use_context=True)
 
     dispatcher = updater.dispatcher
