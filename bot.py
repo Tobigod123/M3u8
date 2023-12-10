@@ -4,7 +4,7 @@ import subprocess
 from telegram import Bot, Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 
-TOKEN = '6528532477:AAHCLp8krmcep32fwhpo_UDiaQepzOYtB78'
+TOKEN = '6528532477:AAGLYjNpYVi9rERAG9zIum6v_wsn31cNYxw'
 ffmpeg_process = None
 
 RECORDING_DIRECTORY = 'Recordings'
