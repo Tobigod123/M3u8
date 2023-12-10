@@ -4,7 +4,7 @@ import subprocess
 import os
 import logging
 
-TOKEN = 'YOUR_BOT_TOKEN'
+TOKEN = '6528532477:AAHCLp8krmcep32fwhpo_UDiaQepzOYtB78'
 ffmpeg_process = None
 
 RECORDING_DIRECTORY = r'C:\Users\root\Pictures\M3U8\Recordings'
