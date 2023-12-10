@@ -58,7 +58,7 @@ def stop(update, context):
 
 def main():
     bot = Bot(token=TOKEN)
-    updater = Updater(bot=bot, use_context=True)
+    updater = Updater(bot=bot)
 
     dispatcher = updater.dispatcher
 
